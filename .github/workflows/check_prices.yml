@@ -1,9 +1,9 @@
 name: Check Steam Skin Prices
 
 on:
-  workflow_dispatch:        # ручной запуск из интерфейса Actions
-  schedule:                 # автоматический cron
-    - cron: '* * * * *'     # каждую минуту (или замените на '0 * * * *' для каждый час)
+  workflow_dispatch:
+  schedule:
+    - cron: '* * * * *'  # каждую минуту (или '0 * * * *' для каждого часа)
 
 jobs:
   check-prices:
@@ -27,5 +27,4 @@ jobs:
           pip install requests python-telegram-bot
 
       - name: Run price checker
-        working-directory: steam-market-monitoring   # или уберите, если код лежит в корне
         run: python hourly_checker.py
