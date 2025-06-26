@@ -1,0 +1,12 @@
+services:
+  - type: cron
+    name: steam-price-checker
+    schedule: "*/15 * * * *"  # каждые 15 минут
+    runtime: python
+    buildCommand: ""
+    startCommand: "python main.py"
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: CHAT_ID
+        sync: false
