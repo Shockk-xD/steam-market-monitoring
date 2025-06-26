@@ -1,14 +1,17 @@
 # hourly_checker.py
-import os
-from telegram import Bot
+
+import asyncio
 from check_logic import perform_price_check
+from telegram import Bot
+import os
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-CHAT_ID = os.getenv("CHAT_ID")
+CHAT_ID = int(os.getenv("CHAT_ID"))
 
-if not BOT_TOKEN or not CHAT_ID:
-    raise Exception("❌ BOT_TOKEN или CHAT_ID не заданы!")
+async def main():
+    msg = perform_price_check()
+    bot = Bot(token=BOT_TOKEN)
+    await bot.send_message(chat_id=CHAT_ID, text=msg)
 
-msg = perform_price_check()
-bot = Bot(token=BOT_TOKEN)
-bot.send_message(chat_id=CHAT_ID, text=msg)
+if __name__ == "__main__":
+    asyncio.run(main())
