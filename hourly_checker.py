@@ -1,5 +1,3 @@
-# hourly_checker.py
-
 import asyncio
 from check_logic import perform_price_check
 from telegram import Bot
@@ -11,7 +9,7 @@ CHAT_ID = int(os.getenv("CHAT_ID"))
 async def main():
     msg = perform_price_check()
     bot = Bot(token=BOT_TOKEN)
-    await bot.send_message(chat_id=CHAT_ID, text=msg)
+    await bot.send_message(chat_id=CHAT_ID, text=msg)  # <-- вот тут важно
 
 if __name__ == "__main__":
     asyncio.run(main())
