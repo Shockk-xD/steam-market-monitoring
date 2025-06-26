@@ -2,7 +2,7 @@ name: Check Steam Skin Prices
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '* * * * *'    # каждую минуту
   workflow_dispatch:
 
 jobs:
@@ -10,13 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - run: |
+
+      - name: Install dependencies
+        run: |
           pip install --upgrade pip
           pip install requests python-telegram-bot
-      - env:
+
+      - name: Run price checker
+        env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID:   ${{ secrets.CHAT_ID }}
-        run: python hourly_checker.py
+        run: |
+          python hourly_checker.py
