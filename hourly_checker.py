@@ -7,9 +7,9 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = int(os.getenv("CHAT_ID"))
 
 async def main():
-    msg = perform_price_check()
+    msg, _ = perform_price_check()  # <--- бери только сообщение
     bot = Bot(token=BOT_TOKEN)
-    await bot.send_message(chat_id=CHAT_ID, text=msg)  # <-- вот тут важно
+    await bot.send_message(chat_id=CHAT_ID, text=msg)
 
 if __name__ == "__main__":
     asyncio.run(main())
